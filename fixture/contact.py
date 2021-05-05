@@ -62,3 +62,11 @@ class ContactHelper:
         # Update
         wd.find_element_by_xpath("(//input[@name='update'])[2]").click()
         self.return_to_home()
+
+    def test_add_contact_to_default_group(self):
+        wd = self.app.wd
+        # Select first contact
+        wd.find_element_by_name("selected[]").click()
+        # Add to default group
+        # Select first group
+        wd.find_element_by_name("add").click()
