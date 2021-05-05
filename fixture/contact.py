@@ -70,3 +70,13 @@ class ContactHelper:
         # Add to default group
         # Select first group
         wd.find_element_by_name("add").click()
+
+    def delete_first_contact(self):
+        wd = self.app.wd
+        # select first contact
+        wd.find_element_by_name("selected[]").click()
+        # click Delete
+        wd.find_element_by_xpath("//input[@value='Delete']").click()
+        # Confirm
+        wd.switch_to_alert().accept()
+        self.return_to_home()
