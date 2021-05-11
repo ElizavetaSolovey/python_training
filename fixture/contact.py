@@ -17,11 +17,13 @@ class ContactHelper:
 
     def open_contact_page(self):
         wd = self.app.wd
-        wd.find_element_by_link_text("add new").click()
+        if not (wd.current_url.endswith("edit.php") and len(wd.find_elements_by_name("submit")) > 0):
+            wd.find_element_by_link_text("add new").click()
 
     def return_to_home(self):
         wd = self.app.wd
-        wd.find_element_by_link_text("home").click()
+        if not (wd.current_url.endswith("") and len(wd.find_elements_by_link_text("First name")) > 0):
+            wd.find_element_by_link_text("home").click()
 
     def modify_first_contact(self, new_contact_data):
         wd = self.app.wd
