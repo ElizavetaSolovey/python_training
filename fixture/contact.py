@@ -5,6 +5,9 @@ class ContactHelper:
 
     def create(self, contact):
         wd = self.app.wd
+        # Open home page - all contacts
+        self.return_to_home()
+        # Open contact page
         self.open_contact_page()
         # Fill contact firm
         wd.find_element_by_name("firstname").click()
@@ -39,6 +42,8 @@ class ContactHelper:
 
     def edit_first_contact(self, contact):
         wd = self.app.wd
+        # Open home page - all contacts
+        self.return_to_home()
         # Edit
         wd.find_element_by_xpath("//img[@alt='Edit']").click()
         wd.find_element_by_name("firstname").click()
@@ -65,6 +70,8 @@ class ContactHelper:
 
     def test_add_contact_to_default_group(self):
         wd = self.app.wd
+        # Open home page - all contacts
+        self.return_to_home()
         # Select first contact
         wd.find_element_by_name("selected[]").click()
         # Add to default group
@@ -73,6 +80,8 @@ class ContactHelper:
 
     def delete_first_contact(self):
         wd = self.app.wd
+        # Open home page - all contacts
+        self.return_to_home()
         # select first contact
         wd.find_element_by_name("selected[]").click()
         # click Delete
