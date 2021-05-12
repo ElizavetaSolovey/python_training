@@ -22,7 +22,7 @@ class ContactHelper:
 
     def return_to_home(self):
         wd = self.app.wd
-        if not (wd.current_url.endswith("") and len(wd.find_elements_by_link_text("First name")) > 0):
+        if not (wd.current_url.endswith("/addressbook/") and len(wd.find_elements_by_link_text("First name")) > 0):
             wd.find_element_by_link_text("home").click()
 
     def modify_first_contact(self, new_contact_data):
