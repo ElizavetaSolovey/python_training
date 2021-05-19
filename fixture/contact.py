@@ -29,16 +29,19 @@ class ContactHelper:
             wd.find_element_by_link_text("home").click()
 
     def modify_first_contact(self, new_contact_data):
-        self.modify_contact_by_index(0)
+        self.modify_contact_by_index(0, new_contact_data)
 
     def modify_contact_by_index(self, index, new_contact_data):
         wd = self.app.wd
         # Open home page - all contacts
         self.return_to_home()
         # Select contact
-        self.select_contact_by_index(index)
+        if index == 0:
+            a = str("(//img[@alt='Edit'])")
+        else:
+            a = str("(//img[@alt='Edit'])[") + str(index+1) + str("]")
         # Open edit page
-        wd.find_element_by_xpath("//img[@alt='Edit']").click()
+        wd.find_element_by_xpath(a).click()
         # Edit
         self.fill_contact_form(new_contact_data)
         # Update
