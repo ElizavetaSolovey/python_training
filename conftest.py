@@ -28,4 +28,4 @@ def stop(request):
 
 def pytest_addoption(parser):
     parser.addoption("--browser", action="store", default="firefox")
-    parser.addoption("--base_url", action="store", default="https://localhost/addressbook/")
+    parser.addoption("--base_url", action="store", default="http://localhost/addressbook/")
