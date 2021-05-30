@@ -17,7 +17,7 @@ except getopt.GetoptError as err:
 
 
 n = 5
-f = "Data/groups.json"
+f = "data/groups.json"
 
 for o, a in opts:
     if o == "-n":
