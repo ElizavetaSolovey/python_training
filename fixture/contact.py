@@ -110,6 +110,7 @@ class ContactHelper:
         wd = self.app.wd
         self.change_field_value("firstname", contact.firstname)
         self.change_field_value("lastname", contact.lastname)
+        self.change_field_value("address", contact.address)
         self.change_field_value("home", contact.homephone)
         self.change_field_value("mobile", contact.mobilephone)
         self.change_field_value("work", contact.workphone)
