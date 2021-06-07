@@ -16,7 +16,7 @@ except getopt.GetoptError as err:
     sys.exit(2)
 
 
-n = 5
+n = 1
 f = "data/contacts.json"
 
 for o, a in opts:
@@ -37,7 +37,7 @@ testdata = [Contact(firstname="", lastname="", address="",
                 homephone=random_string("homephone", 10), mobilephone=random_string("mobilephone", 10), workphone=random_string("workphone", 10),
                 secondaryphone=random_string("secondaryphone", 10), email1=random_string("email1", 10), email2=random_string("email2", 10),
                 email3=random_string("firstname3", 10))
-        for i in range(5)
+        for i in range(n)
 ]
 
 file = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", f)

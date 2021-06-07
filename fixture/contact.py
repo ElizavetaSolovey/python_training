@@ -44,6 +44,17 @@ class ContactHelper:
         self.return_to_home()
         self.contact_cache = None
 
+    def modify_contact_by_id(self, id, new_contact_data):
+        wd = self.app.wd
+        # Open home page - all contacts
+        self.return_to_home()
+        self.open_contact_to_edit_by_id(id)
+        # Edit
+        self.fill_contact_form(new_contact_data)
+        # Update
+        wd.find_element_by_xpath("(//input[@name='update'])[2]").click()
+        self.return_to_home()
+        self.contact_cache = None
 
     def test_add_contact_to_default_group(self):
         wd = self.app.wd
@@ -71,12 +82,29 @@ class ContactHelper:
         self.return_to_home()
         self.contact_cache = None
 
+    def delete_contact_by_id(self, id):
+        wd = self.app.wd
+        # Open home page - all contacts
+        self.return_to_home()
+        # select first contact
+        self.select_contact_by_id(id)
+        # click Delete
+        wd.find_element_by_xpath("//input[@value='Delete']").click()
+        # Confirm
+        wd.switch_to_alert().accept()
+        self.return_to_home()
+        self.contact_cache = None
+
     def select_first_contact(self):
         self.select_contact_by_index(0)
 
     def select_contact_by_index(self, index):
         wd = self.app.wd
         wd.find_elements_by_name("selected[]")[index].click()
+
+    def select_contact_by_id(self, id):
+        wd = self.app.wd
+        wd.find_element_by_css_selector("input[id='%s']" % id).click()
 
     def fill_contact_form(self, contact):
         wd = self.app.wd
@@ -150,6 +178,11 @@ class ContactHelper:
         row = wd.find_elements_by_name("entry")[index]
         cell = row.find_elements_by_tag_name("td")[7]
         cell.find_element_by_tag_name("a").click()
+
+    def open_contact_to_edit_by_id(self, id):
+        wd = self.app.wd
+        self.app.open_home_page()
+        wd.find_element_by_xpath(f"//*[@href='edit.php?id={id}']").click()
 
     def open_contact_view_by_index(self, index):
         wd = self.app.wd
