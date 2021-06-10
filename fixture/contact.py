@@ -56,15 +56,28 @@ class ContactHelper:
         self.return_to_home()
         self.contact_cache = None
 
-    def test_add_contact_to_default_group(self):
+    def test_add_contact_to_group(self, id_contact, id_group):
         wd = self.app.wd
         # Open home page - all contacts
         self.return_to_home()
-        # Select first contact
-        self.select_first_contact()
-        # Add to default group
-        # Select first group
+        # Select contact
+        self.select_contact_by_id(id_contact)
+        # Add to group
+        wd.find_element_by_name("to_group").click()
+        wd.find_element_by_xpath("(//option[@value='%s'])[2]" % id_group).click()
         wd.find_element_by_name("add").click()
+
+    def test_del_contact_from_group(self, id_contact, id_group):
+        wd = self.app.wd
+        # Open home page - all contacts
+        self.return_to_home()
+        # Select group with contacts
+        wd.find_element_by_name("group").click()
+        wd.find_element_by_xpath("(//option[@value='%s'])" % id_group).click()
+        # Select contact in group
+        self.select_contact_by_id(id_contact)
+        # Delete from group
+        wd.find_element_by_name("remove").click()
 
     def delete_first_contact(self):
         self.delete_contact_by_index(0)
