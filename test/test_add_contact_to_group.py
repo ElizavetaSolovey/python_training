@@ -19,7 +19,15 @@ def test_add_contact_to_group(app, group, contact):
     gr = random.choice(groups)
     c = random.choice(contacts)
     old = dbORM.get_contacts_in_group(Group(id=gr.id))
-    app.contact.test_add_contact_to_group(c.id, gr.id)
-    new = dbORM.get_contacts_in_group(Group(id=gr.id))
-    old.append(c)
-    assert sorted(new, key=Group.id_or_max) == sorted(old, key=Group.id_or_max)
+    if len(old) == 0:
+        app.contact.test_add_contact_to_group(c.id, gr.id)
+        new = dbORM.get_contacts_in_group(Group(id=gr.id))
+        old.append(c)
+        assert sorted(new, key=Group.id_or_max) == sorted(old, key=Group.id_or_max)
+    else:
+        for i in range(len(old)):
+            if old[i].id != c.id:
+                app.contact.test_add_contact_to_group(c.id, gr.id)
+                new = dbORM.get_contacts_in_group(Group(id=gr.id))
+                old.append(c)
+                assert sorted(new, key=Group.id_or_max) == sorted(old, key=Group.id_or_max)
